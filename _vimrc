@@ -81,9 +81,11 @@ set history=50               " 历史纪录数
 set showcmd                  " 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
 autocmd GUIEnter * simalt ~x " 启动时窗口自动最大化
 
+
+
 "set cu                      " set cursorcolumn 光标所在行列颜色
 "highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-set cul					     " set cursorline   光球所在行行颜色
+set cul					     " set cursorline   光标所在行行颜色
 "highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 
 " 离开 Insert 模式时自动切换至英文输入法
@@ -108,6 +110,18 @@ set noundofile
 set nobackup
 set noswapfile
 
+
+set smartindent   " 基于autoindent的一些改进
+set tabstop=4     " 编辑时一个TAB字符占多少个空格的位置。
+set shiftwidth=4  " 使用每层缩进的空格数。
+set expandtab     " 是否将输入的TAB自动展开成空格。开启后要输入TAB，需要Ctrl-V<TAB>
+set softtabstop=4 " 方便在开启了et后使用退格（backspace）键，每次退格将删除X个空格
+
+
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+
 " 使用 <Space>o 创建一个新文件
 nnoremap <Leader>o :CtrlP<CR>
 
@@ -123,54 +137,49 @@ command We :!start Explorer /select,%:p<CR>
 "============================================airline setting==========================================
 " airline settings {
                                                             
-		let g:airline_theme="badwolf"                       " 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
-		let laststatus = 2
-		let g:airline_powerline_fonts = 1                   " 使用powerline打过补丁的字体
-                                                            " 开启tabline
-		let g:airline#extensions#tabline#enabled = 1        " tabline中当前buffer两端的分隔字符
-		let g:airline#extensions#tabline#left_sep = ' '     " tabline中未激活buffer两端的分隔字符
-		let g:airline#extensions#tabline#left_alt_sep = '|' " tabline中buffer显示编号
-		let g:airline#extensions#tabline#buffer_nr_show = 1   
-                                                            " 关闭状态显示空白符号计数,这个对我用处不大 "
-		let g:airline#extensions#whitespace#enabled = 0
-		let g:airline#extensions#whitespace#symbol = '!'
+    let g:airline_theme="badwolf"                       " 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
+    let laststatus = 2
+    let g:airline_powerline_fonts = 1                   " 使用powerline打过补丁的字体
+                                                        " 开启tabline
+    let g:airline#extensions#tabline#enabled = 1        " tabline中当前buffer两端的分隔字符
+    let g:airline#extensions#tabline#left_sep = ' '     " tabline中未激活buffer两端的分隔字符
+    let g:airline#extensions#tabline#left_alt_sep = '|' " tabline中buffer显示编号
+    let g:airline#extensions#tabline#buffer_nr_show = 1   
+    let g:airline#extensions#whitespace#enabled = 0     " 关闭状态显示空白符号计数,这个对我用处不大 
+    let g:airline#extensions#whitespace#symbol = '!'
 "}
-
-" 映射切换buffer的键位
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
 
 "============================================font setting==========================================
 " font settting{
-		" 可以通过判断win32,判断是否是gvim,并分别配置英文和中文字体 
-		" 技巧: gvim里输入  :set guifont=* 可以挑选,然后再输入:set guifont 查看所选中的字体 
-		if has('win32')
-		  set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI 
-		  "set guifontwide=Microsoft_YaHei_Mono:h12
-		endif
-		" 字体DejaVu Sans Mono for Powerline，需放在配置文件最后面
+    " 可以通过判断win32,判断是否是gvim,并分别配置英文和中文字体 
+    " 技巧: gvim里输入  :set guifont=* 可以挑选,然后再输入:set guifont 查看所选中的字体 
+    if has('win32')
+      set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI 
+      "set guifontwide=Microsoft_YaHei_Mono:h12
+    endif
+    " 字体DejaVu Sans Mono for Powerline，需放在配置文件最后面
 " }
  
  
 "============================================NERDTree==========================================
 " NERDTree Settings{  
-		" open a NERDTree automatically when vim starts up if no files were specified
-		autocmd StdinReadPre * let s:std_in=1
-		autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-		" close vim if the only window left open is a NERDTree
-		autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-		" 当打开 NERDTree 窗口时，自动显示 Bookmarks
-		let NERDTreeShowBookmarks=1
-		" 按下 F2 调出/隐藏 NERDTree
-		map <F2> :silent! NERDTreeToggle<CR>
+    " open a NERDTree automatically when vim starts up if no files were specified
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " 当打开 NERDTree 窗口时，自动显示 Bookmarks
+    let NERDTreeShowBookmarks=1
+    " 按下 F2 调出/隐藏 NERDTree
+    map <F2> :silent! NERDTreeToggle<CR>
 "}
 
 "============================================Easy-align==========================================
 " Easy-align Settings{
-		vmap <Leader>a <Plug>(EasyAlign)
-		nmap <Leader>a <Plug>(EasyAlign)
-		if !exists('g:easy_align_delimiters')
-		  let g:easy_align_delimiters = {}
-		endif
-		let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+    vmap <Leader>a <Plug>(EasyAlign)
+    nmap <Leader>a <Plug>(EasyAlign)
+    if !exists('g:easy_align_delimiters')
+      let g:easy_align_delimiters = {}
+    endif
+    let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 " }
