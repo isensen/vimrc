@@ -69,21 +69,21 @@ Plug 'scrooloose/nerdtree' ", {'on':'NERDTreeToggle'}
 call plug#end()  
 
 "============================================基础配置==========================================
-let mapleader = "\<Space>"            " leader
-set nu!								  " 行号
-colorscheme desert					  " 主题
-syntax enable						  " 语法高亮
-syntax on							  " 语法高亮
-set ruler							  " 右下角显示光标位置
-set autoindent						  " 自动对齐
-set tabstop=4						  " Tab键的宽度 
-set history=50						  " 历史纪录数
-set showcmd							  " 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
-autocmd GUIEnter * simalt ~x		  " 启动时窗口自动最大化
+let mapleader = "\<Space>"   " leader
+set nu!                      " 行号
+colorscheme desert           " 主题
+syntax enable                " 语法高亮
+syntax on                    " 语法高亮
+set ruler                    " 右下角显示光标位置
+set autoindent               " 自动对齐
+set tabstop=4                " Tab键的宽度
+set history=50               " 历史纪录数
+set showcmd                  " 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
+autocmd GUIEnter * simalt ~x " 启动时窗口自动最大化
 
-"set cuc							  " set cursorcolumn 光标所在行列颜色
+"set cu                      " set cursorcolumn 光标所在行列颜色
 "highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-set cul								  " set cursorline   光球所在行行颜色
+set cul					     " set cursorline   光球所在行行颜色
 "highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 
 " 离开 Insert 模式时自动切换至英文输入法
@@ -111,19 +111,27 @@ set noswapfile
 " 使用 <Space>o 创建一个新文件
 nnoremap <Leader>o :CtrlP<CR>
 
+" 使用 <Space>. 切换到当前编辑文件的目录
+nnoremap <silent> <leader>. :cd %:p:h<CR>
+
+" Open command prompt by running :Cmd
+command Cmd :!start cmd /k cd %:p:h<CR>
+
+" Open windows explorer by running :We
+command We :!start Explorer /select,%:p<CR>
 
 "============================================airline setting==========================================
 " airline settings {
-		" 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
-		let g:airline_theme="badwolf" 
+                                                            
+		let g:airline_theme="badwolf"                       " 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
 		let laststatus = 2
-		let g:airline_powerline_fonts = 1    					 "使用powerline打过补丁的字体
-		" 开启tabline
-		let g:airline#extensions#tabline#enabled = 1      		 "tabline中当前buffer两端的分隔字符
-		let g:airline#extensions#tabline#left_sep = ' '   		 "tabline中未激活buffer两端的分隔字符
-		let g:airline#extensions#tabline#left_alt_sep = '|'      "tabline中buffer显示编号
+		let g:airline_powerline_fonts = 1                   " 使用powerline打过补丁的字体
+                                                            " 开启tabline
+		let g:airline#extensions#tabline#enabled = 1        " tabline中当前buffer两端的分隔字符
+		let g:airline#extensions#tabline#left_sep = ' '     " tabline中未激活buffer两端的分隔字符
+		let g:airline#extensions#tabline#left_alt_sep = '|' " tabline中buffer显示编号
 		let g:airline#extensions#tabline#buffer_nr_show = 1   
-		" 关闭状态显示空白符号计数,这个对我用处不大"
+                                                            " 关闭状态显示空白符号计数,这个对我用处不大 "
 		let g:airline#extensions#whitespace#enabled = 0
 		let g:airline#extensions#whitespace#symbol = '!'
 "}
