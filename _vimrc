@@ -84,7 +84,7 @@ set showcmd                  " 在状态行显示目前所执行的命令，未�
 
 "set cu                      " set cursorcolumn 光标所在行列颜色
 "highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-set cul					     " set cursorline   光标所在行行颜色
+set cul                      " set cursorline   光标所在行行颜色
 "highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 
 " 离开 Insert 模式时自动切换至英文输入法
