@@ -79,7 +79,6 @@ set autoindent               " 自动对齐
 set tabstop=4                " Tab键的宽度
 set history=50               " 历史纪录数
 set showcmd                  " 在状态行显示目前所执行的命令，未完成的指令片段亦会显示出来
-autocmd GUIEnter * simalt ~x " 启动时窗口自动最大化
 
 
 
@@ -96,13 +95,13 @@ set noimdisable
 
 " go是guioptions的缩写
 if has("gui_running") 
-	"au GUIEnter * simalt ~x " 窗口启动时自动最大化 
-	set go-=m " 隐藏菜单栏 
-	set go-=T " 隐藏工具栏 
-	"set go-=L " 隐藏左侧滚动条 
-	"set go-=r " 隐藏右侧滚动条 
-	"set go-=b " 隐藏底部滚动条 
-	"set showtabline=0 " 隐藏Tab栏 
+	autocmd GUIEnter * simalt ~x " 窗口启动时自动最大化 
+	set go-=m                    " 隐藏菜单栏 
+	set go-=T                    " 隐藏工具栏 
+	"set go-=L                   " 隐藏左侧滚动条 
+	"set go-=r                   " 隐藏右侧滚动条 
+	"set go-=b                   " 隐藏底部滚动条 
+	"set showtabline=0           " 隐藏Tab栏 
 endif 
 
 " 在使用vim编辑文件后，总是会有一个以.un~结尾的文件自动生成，看着让人心烦。其实这是vim的undofile和备份文件，可以让你在关闭文件后再次打开时还可以撤销上次的更改如果想使用这个功能的话，但是不想被那些文件烦的话，还可以写入undodir=~/.undodir这样的话，un~文件就会被统一写入~/.undodir里面，不会四处分散了
@@ -140,7 +139,6 @@ command We :!start Explorer /select,%:p<CR>
     let g:airline_theme="badwolf"                       " 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
     let laststatus = 2
     let g:airline_powerline_fonts = 1                   " 使用powerline打过补丁的字体
-                                                        " 开启tabline
     let g:airline#extensions#tabline#enabled = 1        " tabline中当前buffer两端的分隔字符
     let g:airline#extensions#tabline#left_sep = ' '     " tabline中未激活buffer两端的分隔字符
     let g:airline#extensions#tabline#left_alt_sep = '|' " tabline中buffer显示编号
