@@ -35,6 +35,17 @@ function MyDiff()
   endif
 endfunction
 
+"============================================TODO==========================================
+"待分割
+
+" 基本配置
+"source ~/.vim_runtime/vimrcs/basic.vim
+" 插件目录
+"source ~/.vim_runtime/vimrcs/plugins_config.vim
+" 某些文件类型的相关配置
+"source ~/.vim_runtime/vimrcs/filetypes.vim
+" 一些零碎的不好归类的配置
+"source ~/.vim_runtime/vimrcs/more_config.vim
 "============================================中文乱码设置==========================================
 
 " 配置多语言环境,解决中文乱码问题
@@ -60,18 +71,27 @@ endif
 
 " Specify a directory for plugins   
 call plug#begin('~/vimfiles/plugins') 
- 
+
+Plug 'mhinz/vim-startify' 
 Plug 'junegunn/vim-easy-align' 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree' ", {'on':'NERDTreeToggle'}
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Lokaltog/vim-easymotion'
+"主题
+Plug 'morhetz/gruvbox'
+" Always load the vim-devicons as the very last one.
+Plug 'ryanoasis/vim-devicons'
+
 " Initialize plugin system  
 call plug#end()  
-
 "============================================基础配置==========================================
 let mapleader = "\<Space>"   " leader
 set nu!                      " 行号
-colorscheme desert           " 主题
+" gruvbox
+colorscheme gruvbox          " 主题
+set background=dark
 syntax enable                " 语法高亮
 syntax on                    " 语法高亮
 set ruler                    " 右下角显示光标位置
@@ -133,6 +153,8 @@ command Cmd :!start cmd /k cd %:p:h<CR>
 " Open windows explorer by running :We
 command We :!start Explorer /select,%:p<CR>
 
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 "============================================airline setting==========================================
 " airline settings {
                                                             
@@ -151,9 +173,10 @@ command We :!start Explorer /select,%:p<CR>
 " font settting{
     " 可以通过判断win32,判断是否是gvim,并分别配置英文和中文字体 
     " 技巧: gvim里输入  :set guifont=* 可以挑选,然后再输入:set guifont 查看所选中的字体 
+    " 字体使用的是Nerd Font里Unofficial Arch User Repository (AUR)的Nerd Fonts DejaVu Complete
+    " https://aur.archlinux.org/packages/nerd-fonts-dejavu-complete/
     if has('win32')
-      set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI 
-      "set guifontwide=Microsoft_YaHei_Mono:h12
+      set guifont=DejaVuSansMonoForPowerline_Nerd:h12:cANSI:qDRAFT
     endif
     " 字体DejaVu Sans Mono for Powerline，需放在配置文件最后面
 " }
@@ -162,14 +185,31 @@ command We :!start Explorer /select,%:p<CR>
 "============================================NERDTree==========================================
 " NERDTree Settings{  
     " open a NERDTree automatically when vim starts up if no files were specified
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " autocmd StdinReadPre * let s:std_in=1
+    " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
     " close vim if the only window left open is a NERDTree
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     " 当打开 NERDTree 窗口时，自动显示 Bookmarks
     let NERDTreeShowBookmarks=1
-    " 按下 F2 调出/隐藏 NERDTree
-    map <F2> :silent! NERDTreeToggle<CR>
+
+    "设定 NERDTree 视窗大小
+    "let g:NERDTreeWinSize = 25 
+    "
+    " 不显示帮助面板
+    let NERDTreeMinimalUI=1 
+
+    "change default arrows  
+    let g:NERDTreeDirArrows           = 1
+    let g:NERDTreeDirArrowExpandable  = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+    let NERDTreeMinimalUI             = 1
+
+    "不显示隐藏文件
+    "let g:NERDTreeHidden=0
+    "过滤: 所有指定文件和文件夹不显示
+    let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '\.vscode', '__pycache__']   
+    " 按下 F2 调出/隐藏 NERDTree, 加%,打开树时进入当前文件所在目录
+    map <F2> :silent! NERDTreeToggle %<CR>
 "}
 
 "============================================Easy-align==========================================
