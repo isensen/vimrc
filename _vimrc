@@ -79,6 +79,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree' ", {'on':'NERDTreeToggle'}
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'Valloric/ListToggle'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 " 代码检查
 if v:version >= 703
     Plug 'w0rp/ale'
@@ -176,11 +181,20 @@ nmap <s-tab> V<
 vmap <tab>   >gv
 vmap <s-tab> <gv
 
+" 常规模式下输入 cS 清除行尾空格
+nmap cS :%s/\s\+$//g<CR>:noh<CR>
+
+" 常规模式下输入 cM 清除行尾 ^M 符号
+nmap cM :%s/\r$//g<CR>:noh<CR>
+
 "使用vim方向键来切换编辑窗口 Ctrl+H/J/K/L
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" F10 创建新标签
+:map <F10> <Esc>:tabnew<CR>
 "============================================airline setting==========================================
 " airline settings {
     let g:airline_theme="badwolf"                       " 可以去官网看有哪些主题, 也可以:help airline-themes-list来查看
@@ -258,5 +272,50 @@ nnoremap <C-H> <C-W><C-H>
 " }
 
 
+"============================================YCM==========================================
+" YCM Settings {
+    "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+    set completeopt=longest,menu	
+    "离开插入模式后自动关闭预览窗口
+    autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
+    
+	"回车即选中当前项 
+    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+    nnoremap <silent> <leader>gt :YcmCompleter GoTo<cr>
+    nnoremap <silent> <leader>gi :YcmCompleter GoToInclude<cr>
+    nnoremap <silent> <leader>gd :YcmCompleter GoToDefinition<cr>
+    nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<cr>
+
+    " 修改默认快捷键, a-j 有可能和多光标的冲突 
+    let g:ycm_key_list_select_completion = ['<a-j>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<a-k>', '<Up>']
+
+    let g:ycm_global_ycm_extra_conf = "~/vimfiles/plugins/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    " 第二个字符开始补全
+    let g:ycm_min_num_of_chars_for_completion = 2 
+    "在注释输入中也能补全
+    let g:ycm_complete_in_comments = 1
+    "在字符串输入中也能补全
+    let g:ycm_complete_in_strings = 1
+    "注释和字符串中的文字也会被收入补全
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    " tags文件采集
+    let g:ycm_collect_identifiers_from_tags_files = 1 
+    " 关键字补全
+    let g:ycm_seed_identifiers_with_syntax = 1 
+    " 片段补全
+    let g:ycm_use_ultisnips_completer = 1 
+    " 候选条数, 默认就是50
+    let g:ycm_max_num_candidates = 50
+
+"} 
 
 
+"============================================CompleteParameter==========================================
+"CompleteParameter Settings{
+    inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+    smap <a-l> <Plug>(complete_parameter#goto_next_parameter)
+    imap <a-j> <Plug>(complete_parameter#goto_next_parameter)
+    smap <a-h> <Plug>(complete_parameter#goto_previous_parameter)
+    imap <a-h> <Plug>(complete_parameter#goto_previous_parameter)
+"}
