@@ -81,7 +81,9 @@ Plug 'scrooloose/nerdtree' ", {'on':'NERDTreeToggle'}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'Valloric/YouCompleteMe'
 Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'epilande/vim-es2015-snippets'
 Plug 'Valloric/ListToggle'
+Plug 'roblillack/vim-bufferlist'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 " 代码检查
@@ -188,10 +190,10 @@ nmap cS :%s/\s\+$//g<CR>:noh<CR>
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
 "使用vim方向键来切换编辑窗口 Ctrl+H/J/K/L
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <c-J> <c-W><c-J>
+nnoremap <c-K> <c-W><c-K>
+nnoremap <c-L> <c-W><c-L>
+nnoremap <c-H> <c-W><c-H>
 
 " F10 创建新标签
 :map <F10> <Esc>:tabnew<CR>
@@ -272,6 +274,33 @@ nnoremap <C-H> <C-W><C-H>
 " }
 
 
+
+"============================================multiple-cursors==========================================
+"multiple-cursors Settings{
+    let g:multi_cursor_use_default_mapping=0
+
+    " Default mapping
+    let g:multi_cursor_start_word_key      = '<C-Right>'
+    let g:multi_cursor_select_all_word_key = '<A-a>'
+    let g:multi_cursor_start_key           = 'g<C-Right>'
+    let g:multi_cursor_select_all_key      = 'g<A-a>'
+    let g:multi_cursor_next_key            = '<C-Right>'
+    let g:multi_cursor_prev_key            = '<C-Left>'
+    let g:multi_cursor_skip_key            = '<C-x>'
+    let g:multi_cursor_quit_key            = '<Esc>'
+"}
+
+
+"============================================Ultisnips==========================================
+"Ultisnips Settings{
+    let g:UltiSnipsExpandTrigger="<C-j>"
+    "弹出UltiSnips的可用列表,由于不常用, 所以这里设置成了特殊的<C-l>映射
+    let g:UltiSnipsListSnippets="<C-l>"
+    let g:UltiSnipsJumpForwardTrigger="<C-n>"
+    let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+"}
+
+
 "============================================YCM==========================================
 " YCM Settings {
     "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
@@ -319,3 +348,14 @@ nnoremap <C-H> <C-W><C-H>
     smap <a-h> <Plug>(complete_parameter#goto_previous_parameter)
     imap <a-h> <Plug>(complete_parameter#goto_previous_parameter)
 "}
+
+
+"============================================bufferlist==========================================
+"CompleteParameter Settings{
+    map <silent> <F3> :call BufferList()<CR>
+    let g:BufferListWidth = 25
+    let g:BufferListMaxWidth = 50
+    hi BufferSelected term=reverse ctermfg=white ctermbg=red cterm=bold
+    hi BufferNormal term=NONE ctermfg=black ctermbg=darkcyan cterm=NONE
+"}
+
