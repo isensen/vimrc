@@ -8,14 +8,14 @@ My vimrc config file.
 >　YCM安装后会有些卡,可选择性安装
  
 ## 1. 先决条件: 
-    * VIM和版本要在7.3以上
-    * cmake
-    * LLVM
-    * python 
-    * 装有C++开发工具的Visual Studio
+* VIM和版本要在7.3以上
+* cmake
+* LLVM
+* python 
+* 装有C++开发工具的Visual Studio
 ## 2. 安装过程:
 1) Plug 'Valloric/YouCompleteMe'
-2) PlugInstall: 等待安装, 其中弹出窗口后安装 (git submodule会很长时间).
+2) PlugInstall: 等待安装, 其中弹出窗口后安装git submodule会很长时间.
 3) 安装完成后, 安装cmake,记得加入环境变量.
 4) 本机要安装VS(注意要有C++开发工具)
 
