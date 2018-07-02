@@ -26,15 +26,15 @@ My vimrc config file.
 python install.py --clang-completer
 ```
 ## 3. 遇到问题:
-VS2015安装了C+环境后,还是不可以, 才注意到运行
+VS2015安装了C++环境后,还是不可以, 才注意到运行
 ``` shell
  python install.py --clang-completer
 ```
-后失败的提示是:
+失败的提示是:
 ```shell
- CMake Error at CMakeLists.txt:26 (project):
-  Generator<br>
-    Visual Studio 15 2017<br>
+CMake Error at CMakeLists.txt:26 (project):
+    Generator
+    Visual Studio 15 2017
     could not find any instance of Visual Studio.
 ```  
 提示VS 2017版本, 而我本机并未安装2017. 这时有两个办法:
