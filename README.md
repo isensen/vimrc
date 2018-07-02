@@ -4,10 +4,9 @@ My vimrc config file.
 # Todo 
 分割到不同的配置文件里去
 
-# Compile YCM
+# Compile YCM (Window)
 >　YCM安装后会有些卡,可选择性安装
-
-* Window
+ 
 ## 1. 先决条件: 
     * VIM和版本要在7.3以上
     * cmake
@@ -20,7 +19,7 @@ My vimrc config file.
 3) 安装完成后, 安装cmake,记得加入环境变量.
 4) 本机要安装VS(注意要有C++开发工具)
 
-   * [could not find any instance of Visual Studio, when i run python install.py --clang-completer](https://github.com/Valloric/YouCompleteMe/issues/2945)
+    * [could not find any instance of Visual Studio, when i run python install.py --clang-completer](https://github.com/Valloric/YouCompleteMe/issues/2945)
     * [VS安装C++工具](https://wenku.baidu.com/view/08b294a733687e21ae45a9db.html)
 5) 运行安装命令
 ```shell
